@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cyber.Payload.ApiResponse;
 import com.cyber.Payload.BlogDto;
+import com.cyber.Payload.BlogResponse;
 import com.cyber.Services.BlogService;
 
 @RestController()
@@ -41,10 +43,18 @@ public class BlogController {
 	}
 	
 	@GetMapping("/blog/all")
-	ResponseEntity<List<BlogDto>> getAllBlogs()
+	ResponseEntity<BlogResponse> getAllBlogs(@RequestBody 
+			@RequestParam(name = "crimeType",defaultValue ="",required = false) String crimeType,
+			@RequestParam(name = "title",defaultValue ="",required = false) String title,
+			@RequestParam(name = "commitPlace",defaultValue ="",required = false) String commitPlace,
+			@RequestParam(name = "pageNo",defaultValue ="0",required = false) int PageNo,
+			@RequestParam(name = "pageSize",defaultValue ="20",required = false) int pageSize,
+			@RequestParam(name = "sortBy",defaultValue ="blogId",required = false) String sortBy,
+			@RequestParam(name = "direc",defaultValue ="Desc",required = false) String direc
+			)
 	{
-		List<BlogDto> allblogs = this.blogService.getAllBlogs();
-		return new ResponseEntity<List<BlogDto>>(allblogs,HttpStatus.OK);
+	  BlogResponse blogresponse = this.blogService.getAllBlogs(crimeType, title, commitPlace, PageNo, pageSize, sortBy, direc);
+		return new ResponseEntity<BlogResponse>(blogresponse,HttpStatus.OK);
 	}
 	@GetMapping("/blog/{blogId}")
 	ResponseEntity<BlogDto> getBlogById(@RequestBody @PathVariable long blogId)

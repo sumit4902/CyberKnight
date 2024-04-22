@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.cyber.Payload.BlogResponse;
+
 @SpringBootApplication
 @EntityScan("com.cyber.Entities")
 @ComponentScan("com.cyber")
@@ -22,5 +24,11 @@ public class CyberKnightApplication {
 	ModelMapper modelMapper()
 	{
 	  return new ModelMapper();
+	}
+	
+	@Bean
+	BlogResponse blogResponse()
+	{
+		return new BlogResponse();
 	}
 }
