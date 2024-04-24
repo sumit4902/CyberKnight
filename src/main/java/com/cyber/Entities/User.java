@@ -13,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,4 +49,8 @@ public class User {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
 	private List<AuthUser> authUsers = new ArrayList<>();
+	
+	@JsonManagedReference
+	@OneToOne(mappedBy="user",cascade = CascadeType.ALL)
+	private Image image = new Image();
 }

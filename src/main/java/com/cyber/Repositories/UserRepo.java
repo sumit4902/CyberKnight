@@ -8,4 +8,7 @@ public interface  UserRepo extends JpaRepository<User,Long> {
 	
 	// custom methods to perform database operation // 
     User findByApiKey(String apiKey);
+    
+    User findByEmail(String email);
+    User findByContact(String contact);
 }

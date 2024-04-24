@@ -1,6 +1,7 @@
 package com.cyber.Entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -9,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,5 +39,9 @@ public class Blog {
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	private User user;
+	
+	@JsonManagedReference
+	@OneToOne
+	private Image image = new Image();
 	
 }

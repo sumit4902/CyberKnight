@@ -2,12 +2,14 @@ package com.cyber.ServiceImpl;
 
 import java.util.Date;
 
+
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cyber.Entities.User;
@@ -25,12 +27,15 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private ModelMapper modelmapper;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	
 	@Override
 	public UserDto createUser(UserDto userDto) {
 		userDto.setDate(new Date());  
 		User user = this.modelmapper.map(userDto,User.class);
+		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 		User saveduser = this.userRepo.save(user);
 	    return this.modelmapper.map(saveduser,UserDto.class);
 	}
@@ -41,7 +46,7 @@ public class UserServiceImpl implements UserService {
 		user.setUserName(userDto.getUserName());
 		user.setContact(userDto.getContact());
 		user.setEmail(userDto.getEmail());
-		user.setPassword(userDto.getPassword());
+		user.setPassword(passwordEncoder.encode(userDto.getPassword() ));
 		user.setAddress(userDto.getAddress());
 		User updatedUser = this.userRepo.save(user);
 		return this.modelmapper.map(updatedUser, UserDto.class);

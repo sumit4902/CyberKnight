@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.cyber.Entities.AuthUser;
 import com.cyber.Entities.Blog;
+import com.cyber.Entities.Image;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,4 +37,6 @@ public class UserDto {
 	private List<Blog> blogs = new ArrayList<Blog>(); 
 	
 	private List<AuthUser> authUsers = new ArrayList<>();
+	
+	private Image image = new Image();
 }

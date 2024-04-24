@@ -7,6 +7,10 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.cyber.Payload.BlogResponse;
 
@@ -31,4 +35,17 @@ public class CyberKnightApplication {
 	{
 		return new BlogResponse();
 	}
+	
+	 @Bean
+	    public PasswordEncoder passwordEncoder() {
+	        return new BCryptPasswordEncoder();
+	    }
+	 
+	 @Bean
+	    public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {
+	        return builder.getAuthenticationManager();
+	    }
+	
+	 
+	 
 }
