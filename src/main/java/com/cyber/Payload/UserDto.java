@@ -34,9 +34,9 @@ public class UserDto {
 	private String apiKey;
 	private Date date;
 	
-	private List<Blog> blogs = new ArrayList<Blog>(); 
+	private List<BlogDto> blogs = new ArrayList<>(); 
 	
-	private List<AuthUser> authUsers = new ArrayList<>();
+	private List<AuthUserDto> authUsers = new ArrayList<>();
 	
-	private Image image = new Image();
+	private ImageDto image ;
 }

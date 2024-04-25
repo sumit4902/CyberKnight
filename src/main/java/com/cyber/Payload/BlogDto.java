@@ -24,5 +24,5 @@ public class BlogDto {
 	private String description;
     
 	@OneToOne
-	private Image image = new Image();
+	private ImageDto image = new ImageDto();
 }

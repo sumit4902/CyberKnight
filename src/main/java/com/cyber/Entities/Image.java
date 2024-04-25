@@ -24,11 +24,11 @@ public class Image {
 	private long imageId;
 	private String imageName;
 	
-	@JsonBackReference
+	//@JsonBackReference
 	@OneToOne
 	private User user;
 	
-	@JsonBackReference
+	//@JsonBackReference
 	@OneToOne
 	private Blog blog;
 }

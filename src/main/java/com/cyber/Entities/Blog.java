@@ -36,11 +36,11 @@ public class Blog {
 	@Column(length = 10000000)
 	private String description;
 	
-	@JsonBackReference
-	@ManyToOne(cascade = CascadeType.ALL)
+	//@JsonBackReference
+	@ManyToOne()
 	private User user;
 	
-	@JsonManagedReference
+	//@JsonManagedReference
 	@OneToOne
 	private Image image = new Image();
 	

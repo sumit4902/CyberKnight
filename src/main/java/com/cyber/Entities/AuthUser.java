@@ -33,7 +33,7 @@ public class AuthUser {
 	@Column(nullable = true)
 	private  String  password;
 	
-	@JsonBackReference
-	@ManyToOne(cascade = CascadeType.ALL)
+	//@JsonBackReference
+	@ManyToOne()
 	private User user;
 }
