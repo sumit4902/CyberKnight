@@ -43,11 +43,26 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDto updateUser(UserDto userDto, long userId) {
 		User user  = this.userRepo.findById(userId).orElseThrow(()-> new RuntimeException("User Not Found"));
-		user.setUserName(userDto.getUserName());
-		user.setContact(userDto.getContact());
-		user.setEmail(userDto.getEmail());
-		user.setPassword(passwordEncoder.encode(userDto.getPassword() ));
-		user.setAddress(userDto.getAddress());
+		if(userDto.getUserName()!=null)
+		{
+			user.setUserName(userDto.getUserName());
+		}
+		if(userDto.getContact()!=null)
+		{
+			user.setContact(userDto.getContact());
+		}
+		if(userDto.getEmail()!=null)
+		{
+			user.setEmail(userDto.getEmail());
+		}
+		if(userDto.getPassword()!=null)
+		{
+			user.setPassword(passwordEncoder.encode(userDto.getPassword() ));
+		}
+		if(userDto.getAddress()!=null)
+		{
+			user.setAddress(userDto.getAddress());
+		}
 		User updatedUser = this.userRepo.save(user);
 		return this.modelmapper.map(updatedUser, UserDto.class);
 	}

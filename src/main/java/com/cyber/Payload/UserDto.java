@@ -3,11 +3,6 @@ package com.cyber.Payload;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import com.cyber.Entities.AuthUser;
-import com.cyber.Entities.Blog;
-import com.cyber.Entities.Image;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

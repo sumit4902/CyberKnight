@@ -45,7 +45,7 @@ public class ImageController {
 		
 		
 	    
-	    @PostMapping("user/{userId}/image/upload")
+	    @PostMapping("/image/upload/user/{userId}")
 	    ResponseEntity<ImageDto> createImageByuserId(@RequestBody @RequestParam("image") MultipartFile image,@PathVariable long userId) throws IOException
 	    {
 	    	String fileName = this.fileService.uploadImage(path, image);
@@ -53,8 +53,8 @@ public class ImageController {
 	    	return new ResponseEntity<ImageDto>(imagesaved,HttpStatus.CREATED);
 	    }
 	    
-	    @PostMapping("blog/{blogId}/image/upload")
-	    ResponseEntity<ImageDto> createImageByblogId(@RequestParam("image") MultipartFile image,long blogId) throws IOException
+	    @PostMapping("/image/upload/blog/{blogId}")
+	    ResponseEntity<ImageDto> createImageByblogId(@RequestParam("image") MultipartFile image,@PathVariable long blogId) throws IOException
 	    {
 	    	String fileName = this.fileService.uploadImage(path, image);
 	    	ImageDto imagesaved  = this.imageService.createImageByblogId(fileName, blogId);
@@ -74,7 +74,7 @@ public class ImageController {
 
 		// Download image By UserId //
 		
-	    @GetMapping(value="/user/{userId}/image",produces = MediaType.IMAGE_JPEG_VALUE)
+	    @GetMapping(value="/image/user/{userId}",produces = MediaType.IMAGE_JPEG_VALUE)
 	    void downloadByUserId(@RequestBody @PathVariable long userId, HttpServletResponse response) throws IOException
 	    {
 	    	ImageDto image = this.imageService.getByuserId(userId);
@@ -87,7 +87,7 @@ public class ImageController {
 	    
 	    // Download image By BlogId //
 	    
-	    @GetMapping(value="/blog/{blogId}/image",produces = MediaType.IMAGE_JPEG_VALUE)
+	    @GetMapping(value="/image/blog/{blogId}",produces = MediaType.IMAGE_JPEG_VALUE)
 	    void downloadByblogId(@RequestBody @PathVariable long blogId, HttpServletResponse response) throws IOException
 	    {
 	    	ImageDto image = this.imageService.getImageByblogId(blogId);

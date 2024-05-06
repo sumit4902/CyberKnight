@@ -18,7 +18,7 @@ public class SecurityConfig {
     private JwtAuthenticationFilter filter;
     
     
-    public static final String[] PUBLIC_URLS = {"/api/v1/auth/login","/api/v1/user/create/**","/api/Emailverification","/api/SendEmail",
+    public static final String[] PUBLIC_URLS = {"/api/v1/auth/login","/api/v1/user/create/**","/api/v1/image/**","/api/Emailverification","/api/SendEmail",
     		"/api/ChangePassword"};
            
 

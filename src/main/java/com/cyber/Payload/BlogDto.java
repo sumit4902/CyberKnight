@@ -1,6 +1,7 @@
 package com.cyber.Payload;
 
-import com.cyber.Entities.Image;
+
+
 
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -24,5 +25,5 @@ public class BlogDto {
 	private String description;
     
 	@OneToOne
-	private ImageDto image = new ImageDto();
+	private ImageDto image ;
 }
