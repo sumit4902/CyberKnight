@@ -29,9 +29,9 @@ public class UserDto {
 	private String apiKey;
 	private Date date;
 	
-	private List<BlogDto> blogs = new ArrayList<>(); 
+	//private List<BlogDto> blogs = new ArrayList<>();  // it is accessed  via api //
 	
-	private List<AuthUserDto> authUsers = new ArrayList<>();
+	//private List<AuthUserDto> authUsers = new ArrayList<>();   // It is Accessed via api //
 	
 	private ImageDto image ;
 }

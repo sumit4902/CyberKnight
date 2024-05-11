@@ -8,7 +8,7 @@ public class ShiftCipher {
         for (int i = 0; i < text.length(); i++) {
             char ch = text.charAt(i);
             if (Character.isLetter(ch)) {
-                char shifted = (char) (((ch - 'A' + key) % 26) + 'A');
+                char shifted = (char) (((ch - 'A' + (key)) % 26) + 'A');
                 result.append(shifted);
             } else {
                 result.append(ch);
@@ -20,7 +20,7 @@ public class ShiftCipher {
     // Decrypts text using a shift specified by key
     public static String decrypt(String text, int key) {
         // Decrypting is the same as encrypting with negative key
-        return encrypt(text, -key);
+        return encrypt(text, (-key));
     }
 
   

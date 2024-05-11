@@ -1,9 +1,5 @@
 package com.cyber.Payload;
 
-
-
-
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +19,7 @@ public class BlogDto {
 	private String commitPlace;
 	
 	private String description;
-    
-	@OneToOne
+    private UserDto user;
+	
 	private ImageDto image ;
 }

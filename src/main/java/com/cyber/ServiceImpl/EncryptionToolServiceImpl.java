@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.cyber.Algorithms.AES;
 import com.cyber.Algorithms.DES;
 import com.cyber.Algorithms.DigitalSignature;
+import com.cyber.Algorithms.HashCode;
 import com.cyber.Algorithms.MAC;
 import com.cyber.Algorithms.MonoAlphabetic;
 import com.cyber.Algorithms.PolyalphabeticVigenereCipher;
@@ -22,6 +23,7 @@ public class EncryptionToolServiceImpl implements EncryptionToolService{
 	private PolyalphabeticVigenereCipher polyalphabetic = new PolyalphabeticVigenereCipher();
 	private MonoAlphabetic monoalphabetic = new MonoAlphabetic();
 	private MAC mac = new MAC();
+	private HashCode hash = new HashCode();
 	
 	EncryptionToolDto endto= new EncryptionToolDto();
 	
@@ -55,7 +57,7 @@ public class EncryptionToolServiceImpl implements EncryptionToolService{
 			
 		}
 		
-		////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////
 		// for AES
 		if(algoType.equalsIgnoreCase("AES"))
 		{
@@ -79,7 +81,7 @@ public class EncryptionToolServiceImpl implements EncryptionToolService{
 			
 		}
 		
-		/////////////////////////////////// DIGITAL SIGNATURE ////////////////////////////////////////////////
+/////////////////////////////////// DIGITAL SIGNATURE ////////////////////////////////////////////////
 		if(algoType.equalsIgnoreCase("DigitalSignature"))
 		{
 			if( message!="")
@@ -101,7 +103,7 @@ public class EncryptionToolServiceImpl implements EncryptionToolService{
 			
 		}
 		
-		////////////////////////////////////////// ShiftCipher //////////////////////////////////////////////////
+////////////////////////////////////////// ShiftCipher //////////////////////////////////////////////////
 		if(algoType.equalsIgnoreCase("ShiftCipher"))
 		{
 			if(key!="" && message!="")   // Key Should be integer it indicates the No of Shift //
@@ -109,7 +111,7 @@ public class EncryptionToolServiceImpl implements EncryptionToolService{
 				 
 				try {
 					
-					 cipherText= shiftCipher.encrypt(message,Integer.parseInt(key));
+					 cipherText= shiftCipher.encrypt(message.toUpperCase(),Integer.parseInt(key));
 					
 				}
 				catch(Exception e)
@@ -134,7 +136,7 @@ public class EncryptionToolServiceImpl implements EncryptionToolService{
 
                 try {
 
-                cipherText= polyalphabetic.encrypt(message,key);
+                cipherText= polyalphabetic.encrypt(message.toUpperCase(),key.toUpperCase());
                       
                 }
                 catch(Exception e)
@@ -150,7 +152,7 @@ public class EncryptionToolServiceImpl implements EncryptionToolService{
                 
                 
                 
-    ////////////////////////////////////////////////   MonoAlphabetic //////////////////////////////////////////
+////////////////////////////////////////////////   MonoAlphabetic //////////////////////////////////////////
                 if(algoType.equalsIgnoreCase("Monoalphabetic"))
                 {
                 	 key = "asdfghjklzxcvbnmqwertyuiop"+key;
@@ -160,7 +162,7 @@ public class EncryptionToolServiceImpl implements EncryptionToolService{
 
                 try {
 
-                cipherText= monoalphabetic.encrypt(message,key);
+                cipherText= monoalphabetic.encrypt(message.toUpperCase(),key.toUpperCase());
 
                 }
                 catch(Exception e)
@@ -186,14 +188,14 @@ public class EncryptionToolServiceImpl implements EncryptionToolService{
 
                 try {
 
-                cipherText= mac.generateMAC(message);
+                cipherText= mac.generateMAC(message.toUpperCase());
 
                 }
                 catch(Exception e)
                 {
                 System.out.print(e);
                 }
-                endto.setPlainText(message);
+                endto.setPlainText(message.toUpperCase());
                 endto.setCipherText(cipherText);
                               return endto;
                 }
@@ -202,7 +204,29 @@ public class EncryptionToolServiceImpl implements EncryptionToolService{
                 
                 
 		
-		       
+///////////////////////////////////////////////////////// HAC FUNCTION //////////////////////////////////////////
+                
+                if(algoType.equalsIgnoreCase("Hash"))
+                { 
+                	
+               if( message!="")   
+                {
+
+                try {
+
+                cipherText= hash.sha256Hash(message.toUpperCase());
+
+                }
+                catch(Exception e)
+                {
+                System.out.print(e);
+                }
+                endto.setPlainText(message.toUpperCase());
+                endto.setCipherText(cipherText);
+                              return endto;
+                }
+
+                 }
 		
 		return null;
 	}
@@ -295,7 +319,9 @@ public class EncryptionToolServiceImpl implements EncryptionToolService{
 			
 		}
 		
-		///////////////////////////////////////// ShiftCipher ///////////////////////////////////////////////
+///////////////////////////////////////// ShiftCipher ///////////////////////////////////////////////
+		
+		
 		if(algoType.equalsIgnoreCase("ShiftCipher"))
 		{
 			if(key!="" && message!="")
@@ -318,15 +344,16 @@ public class EncryptionToolServiceImpl implements EncryptionToolService{
 			
 		}
 		
+		
 ///////////////////////////////////////// PolyAlphabetic  ///////////////////////////////////////////////
-if(algoType.equalsIgnoreCase("Ployalphabetic"))
+if(algoType.equalsIgnoreCase("Polyalphabetic"))
 {
 if(key!="" && message!="")
 {
 
 try {
 
-plainText = polyalphabetic.decrypt(message, key);
+plainText = polyalphabetic.decrypt(message.toUpperCase(),key.toUpperCase());
 
 
 }
@@ -350,7 +377,7 @@ if(key!="" && message!="")
      key= key.substring(key.length()-26,key.length());
 try {
 
-plainText = monoalphabetic.decrypt(message,key);
+plainText = monoalphabetic.decrypt(message.toUpperCase(),key.toUpperCase());
 
 
 }
@@ -375,7 +402,7 @@ if(key!="" && message!="")
 	try {
           
 		
-  plainText = mac.verifyMAC(message,key);
+  plainText = mac.verifyMAC(message.toUpperCase(),key);
 
 
 }

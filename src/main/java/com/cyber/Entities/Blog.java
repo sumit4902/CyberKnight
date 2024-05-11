@@ -34,13 +34,13 @@ public class Blog {
 	private String commitPlace;
 	@Column(length = 10000000)
 	private String description;
-	
+	  
 	//@JsonBackReference
 	@ManyToOne()
 	private User user;
 	
 	//@JsonManagedReference
-	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	private Image image = new Image();
+	@OneToOne(mappedBy = "blog",cascade=CascadeType.ALL ,fetch = FetchType.EAGER)
+	private Image image ;
 	
 }

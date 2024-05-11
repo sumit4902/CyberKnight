@@ -53,5 +53,5 @@ public class User {
 	
 	//@JsonManagedReference
 	@OneToOne(mappedBy="user",cascade = CascadeType.ALL,fetch=FetchType.EAGER)
-	private Image image = new Image();
+	private Image image ;
 }

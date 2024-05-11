@@ -12,7 +12,8 @@ public class PolyalphabeticVigenereCipher {
             if (Character.isLetter(plainChar)) {
                 char keyChar = key.charAt(keyIndex % key.length());
                 int shift = keyChar - 'A';
-                char encryptedChar = (char) (((plainChar - 'A' + shift) % 26) + 'A');
+                char encryptedChar = (char) (((plainChar - 'A' + shift ) % 26) + 'A');
+
                 ciphertext.append(encryptedChar);
                 keyIndex++;
             } else {
@@ -33,7 +34,8 @@ public class PolyalphabeticVigenereCipher {
             if (Character.isLetter(cipherChar)) {
                 char keyChar = key.charAt(keyIndex % key.length());
                 int shift = keyChar - 'A';
-                char decryptedChar = (char) (((cipherChar - 'A' - shift + 26) % 26) + 'A');
+                char decryptedChar = (char) (((cipherChar - 'A' - (shift ) + 26) % 26) + 'A');
+
                 plaintext.append(decryptedChar);
                 keyIndex++;
             } else {
